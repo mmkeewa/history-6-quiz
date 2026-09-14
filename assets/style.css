@@ -1,0 +1,620 @@
+:root {
+  --bg: #f6f3ec;
+  --bg-card: #fffdf8;
+  --ink: #2a2520;
+  --ink-soft: #6b6157;
+  --line: #e3dbcc;
+  --accent: #8a5a2b;
+  --accent-soft: #f0e4d2;
+  --ok: #2e7d4f;
+  --ok-bg: #e4f4ea;
+  --bad: #b3261e;
+  --bad-bg: #fbe6e4;
+  --shadow: 0 1px 2px rgba(42, 37, 32, .06), 0 6px 20px rgba(42, 37, 32, .06);
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171512;
+    --bg-card: #211e1a;
+    --ink: #ece6dc;
+    --ink-soft: #a89e91;
+    --line: #37322b;
+    --accent: #d9a566;
+    --accent-soft: #3a2f22;
+    --ok: #74d29b;
+    --ok-bg: #1d3327;
+    --bad: #f1938b;
+    --bad-bg: #3a2320;
+    --shadow: none;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 18px 80px;
+}
+
+a { color: var(--accent); }
+
+/* ---------- Шапка ---------- */
+
+.site-head {
+  text-align: center;
+  padding: 26px 0 8px;
+}
+
+.site-head .kicker {
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+
+.site-head h1 {
+  font-size: clamp(24px, 6vw, 34px);
+  line-height: 1.2;
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+.site-head p.lede {
+  color: var(--ink-soft);
+  margin: 0 auto;
+  max-width: 44ch;
+  font-size: 15px;
+}
+
+/* ---------- Общий прогресс ---------- */
+
+.overall {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 24px 0 8px;
+  box-shadow: var(--shadow);
+}
+
+.overall-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.overall-row strong { font-size: 15px; }
+.overall-row span { color: var(--ink-soft); font-size: 14px; }
+
+.bar {
+  height: 8px;
+  background: var(--accent-soft);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width .35s ease;
+}
+
+/* ---------- Главы ---------- */
+
+.chapter {
+  margin-top: 28px;
+}
+
+.chapter > h2 {
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 10px 4px;
+  font-weight: 600;
+}
+
+.chapter > h2 b {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.plist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.pcard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow);
+  transition: transform .12s ease, border-color .12s ease;
+}
+
+.pcard:hover { transform: translateY(-1px); border-color: var(--accent); }
+.pcard:active { transform: translateY(0); }
+
+.pcard .num {
+  flex: none;
+  min-width: 58px;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.pcard .ttl { flex: 1; font-size: 15px; }
+
+.pcard .meta {
+  flex: none;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.pcard.done { border-color: var(--ok); }
+.pcard.done .meta { color: var(--ok); font-weight: 600; }
+
+/* ---------- Кнопки ---------- */
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 99px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity .15s ease;
+}
+
+@media (prefers-color-scheme: dark) { .btn { color: #171512; } }
+
+.btn:hover { opacity: .88; }
+.btn:disabled { opacity: .45; cursor: default; }
+
+.btn.ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+@media (prefers-color-scheme: dark) { .btn.ghost { color: var(--accent); } }
+
+/* ---------- Страница теста ---------- */
+
+.quiz-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.quiz-head .back {
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.quiz-head .back:hover { color: var(--accent); }
+
+.quiz-title {
+  margin: 0 0 4px;
+  font-size: clamp(19px, 4.5vw, 24px);
+  line-height: 1.25;
+}
+
+.quiz-sub {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.progress-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+
+.question {
+  font-size: clamp(17px, 4vw, 20px);
+  line-height: 1.4;
+  font-weight: 600;
+  margin: 0 0 18px;
+}
+
+.repeat-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 99px;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 15px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color .12s ease, background .12s ease;
+}
+
+.opt:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+.opt:disabled { cursor: default; }
+
+.opt .letter {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.opt.is-correct {
+  border-color: var(--ok);
+  background: var(--ok-bg);
+}
+
+.opt.is-correct .letter { background: var(--ok); color: var(--ok-bg); }
+
+.opt.is-wrong {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+}
+
+.opt.is-wrong .letter { background: var(--bad); color: var(--bad-bg); }
+
+.opt.dim { opacity: .5; }
+
+/* ---------- Разбор ---------- */
+
+.feedback {
+  margin-top: 18px;
+  border-radius: 12px;
+  padding: 15px 17px;
+  border: 1px solid;
+  font-size: 15px;
+}
+
+.feedback.good { border-color: var(--ok); background: var(--ok-bg); }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+
+.feedback .fb-title {
+  font-weight: 700;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feedback.good .fb-title { color: var(--ok); }
+.feedback.bad .fb-title { color: var(--bad); }
+
+.feedback p { margin: 6px 0 0; }
+.feedback .answer { font-weight: 600; }
+.feedback .again { margin-top: 10px; font-size: 13.5px; color: var(--ink-soft); }
+
+.actions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- Финал ---------- */
+
+.finish { text-align: center; padding: 34px 22px; }
+.finish .emoji { font-size: 54px; line-height: 1; margin-bottom: 12px; }
+.finish h2 { margin: 0 0 10px; font-size: clamp(22px, 5vw, 28px); }
+.finish p { color: var(--ink-soft); margin: 0 auto 6px; max-width: 42ch; }
+.finish .praise { color: var(--ink); font-size: 17px; }
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin: 22px 0 26px;
+  flex-wrap: wrap;
+}
+
+.stat b { display: block; font-size: 24px; color: var(--accent); }
+.stat span { font-size: 13px; color: var(--ink-soft); }
+
+.site-foot {
+  margin-top: 46px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.site-foot button {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.loading, .error { text-align: center; color: var(--ink-soft); padding: 40px 0; }
+
+/* ==========================================================
+   Топорные весёлые анимации
+   ========================================================== */
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  15% { transform: translateX(-10px) rotate(-1.5deg); }
+  30% { transform: translateX(9px) rotate(1.5deg); }
+  45% { transform: translateX(-8px) rotate(-1deg); }
+  60% { transform: translateX(7px) rotate(1deg); }
+  75% { transform: translateX(-4px) rotate(-.5deg); }
+  90% { transform: translateX(3px) rotate(.5deg); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.035) rotate(-.6deg); }
+  65% { transform: scale(.985) rotate(.4deg); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fly {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 1; }
+}
+
+@keyframes bounce-emoji {
+  0%, 100% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-22px) scale(1.12); }
+  55% { transform: translateY(0) scale(.94); }
+  75% { transform: translateY(-9px) scale(1.04); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stripes {
+  from { background-position: 0 0; }
+  to { background-position: 28px 0; }
+}
+
+@keyframes flash-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 79, 0); }
+  40% { box-shadow: 0 0 0 9px rgba(46, 125, 79, .22); }
+}
+
+/* Карточка реагирует на ответ */
+.card.answered-wrong { animation: shake .55s cubic-bezier(.36, .07, .19, .97) both; }
+.card.answered-right { animation: pop .45s ease both; }
+
+/* Правильная кнопка подмигивает */
+.opt.is-correct { animation: flash-green .8s ease both; }
+
+/* Разбор выезжает снизу */
+.feedback { animation: slide-in .32s ease both; }
+
+/* Значок в разборе пляшет */
+.feedback .fb-icon {
+  display: inline-block;
+  font-size: 20px;
+  animation: wiggle .5s ease-in-out 3;
+}
+
+.feedback.good .fb-icon { animation: bounce-emoji .7s ease 2; }
+
+/* Полосатый прогресс-бар */
+.bar > i {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, .28) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .28) 50%,
+    rgba(255, 255, 255, .28) 75%, transparent 75%
+  );
+  background-size: 28px 28px;
+  animation: stripes .9s linear infinite;
+}
+
+/* Кнопки вдавливаются */
+.btn:active { transform: scale(.94); }
+.opt:active:not(:disabled) { transform: scale(.985); }
+
+/* Плашка «этот вопрос уже был» покачивается */
+.repeat-tag { animation: wiggle .6s ease-in-out 2; transform-origin: center; }
+
+/* Финал */
+.finish .emoji { animation: bounce-emoji 1s ease infinite; }
+.finish h2 { animation: wiggle .55s ease-in-out 3; }
+.finish .stat b { animation: pop .5s ease both; }
+
+/* Летящие эмодзи */
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 50;
+}
+
+#confetti span {
+  position: absolute;
+  top: 0;
+  font-size: 26px;
+  animation: fly linear forwards;
+  will-change: transform;
+}
+
+/* Уважаем настройку «меньше движения» */
+@media (prefers-reduced-motion: reduce) {
+  .card.answered-wrong,
+  .card.answered-right,
+  .opt.is-correct,
+  .feedback,
+  .feedback .fb-icon,
+  .repeat-tag,
+  .finish .emoji,
+  .finish h2,
+  .finish .stat b,
+  .bar > i,
+  #confetti span { animation: none !important; }
+  #confetti { display: none; }
+  .btn:active, .opt:active:not(:disabled) { transform: none; }
+}
+
+/* ==========================================================
+   Мобильная версия
+   ========================================================== */
+
+html, body { overflow-x: hidden; }
+
+@media (max-width: 600px) {
+
+  body { font-size: 16px; }
+
+  .wrap { padding: 12px 16px 56px; }
+
+  .site-head { padding: 14px 0 4px; }
+  .site-head .kicker { font-size: 12px; margin-bottom: 6px; }
+  .site-head p.lede { font-size: 14.5px; }
+
+  .overall { margin: 18px 0 4px; padding: 14px 16px; }
+
+  .chapter { margin-top: 22px; }
+  .chapter > h2 { font-size: 12.5px; letter-spacing: .06em; line-height: 1.4; margin-left: 2px; }
+
+  /* Карточка параграфа: номер и статус сверху, название — во всю ширину */
+  .pcard {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    padding: 14px 16px;
+    min-height: 64px;
+  }
+
+  .pcard .num { min-width: 0; font-size: 14px; }
+
+  .pcard .meta {
+    margin-left: auto;
+    font-size: 12.5px;
+  }
+
+  .pcard .ttl {
+    flex: 0 0 100%;
+    order: 3;
+    font-size: 15.5px;
+    line-height: 1.35;
+  }
+
+  /* Тест */
+  .quiz-head { margin-bottom: 12px; }
+  .quiz-title { font-size: 20px; }
+  .quiz-sub { margin-bottom: 14px; font-size: 13.5px; }
+  .progress-line { font-size: 12.5px; gap: 10px; }
+
+  .card { padding: 18px 16px; margin-top: 16px; border-radius: 16px; }
+
+  .question { font-size: 18px; margin-bottom: 16px; }
+
+  /* Кнопки-ответы: крупные, удобно попадать пальцем */
+  .opt {
+    padding: 15px 14px;
+    min-height: 56px;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 14px;
+  }
+
+  .opt .letter { width: 28px; height: 28px; font-size: 14px; }
+
+  .feedback { padding: 14px 15px; font-size: 15px; }
+
+  /* Главная кнопка «Дальше» — во всю ширину, её невозможно не заметить */
+  .actions { margin-top: 16px; }
+  .actions .btn { flex: 1 1 100%; text-align: center; padding: 15px 20px; font-size: 16.5px; }
+
+  .finish { padding: 26px 16px; }
+  .finish .emoji { font-size: 46px; }
+  .stats { gap: 18px; margin: 18px 0 22px; }
+  .stat b { font-size: 21px; }
+
+  .site-foot { margin-top: 32px; font-size: 12.5px; }
+}
+
+/* Совсем узкие экраны */
+@media (max-width: 360px) {
+  .wrap { padding: 12px 12px 48px; }
+  .card { padding: 16px 13px; }
+  .opt { font-size: 15.5px; padding: 14px 12px; }
+  .stats { gap: 12px; }
+}
+
+/* Пальцем, а не мышкой: убираем «залипающий» ховер на тач-экранах */
+@media (hover: none) {
+  .pcard:hover { transform: none; border-color: var(--line); }
+  .opt:hover:not(:disabled) { border-color: var(--line); background: transparent; }
+  .btn:hover { opacity: 1; }
+}
