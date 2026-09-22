@@ -30,9 +30,10 @@ function render(book, progress) {
       const isDone = !!(rec && rec.done);
       if (isDone) done++;
       const meta = isDone ? 'пройдено ✓' : 'начать';
+      const ear = p.audio ? '<span class="ear" title="Есть аудиопересказ">🎧</span>' : '';
       html += `<li><a class="pcard${isDone ? ' done' : ''}" href="test.html?p=${encodeURIComponent(p.id)}">
         <span class="num">${escapeHtml(p.num)}</span>
-        <span class="ttl">${escapeHtml(p.title)}</span>
+        <span class="ttl">${escapeHtml(p.title)}${ear}</span>
         <span class="meta">${meta}</span>
       </a></li>`;
     }
