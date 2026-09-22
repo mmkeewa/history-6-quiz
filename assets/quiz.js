@@ -130,6 +130,21 @@ function markDone(id) {
   } catch (e) { /* приватный режим — просто не сохраняем */ }
 }
 
+/* ---------- аудиопересказ ---------- */
+
+function renderAudio(meta) {
+  if (!meta.audio) return;
+  const box = $('audio-box');
+  if (!box) return;
+  box.innerHTML = `
+    <div class="audio-card">
+      <p class="audio-title">🎧 Сначала послушай пересказ</p>
+      <p class="audio-hint">Короткий рассказ по всему параграфу — после него на вопросы отвечать намного легче.</p>
+      <audio controls preload="none" src="${escapeHtml(meta.audio)}"></audio>
+    </div>`;
+  box.hidden = false;
+}
+
 /* ---------- прогресс ---------- */
 
 function updateProgress() {
@@ -319,6 +334,7 @@ if (!id) {
         ? `Глава ${meta.chapter.roman}. ${meta.chapter.title}`
         : meta.chapter.title;
       document.title = `${meta.num} — тест`;
+      renderAudio(meta);
 
       return fetch(`data/q/${encodeURIComponent(id)}.json`);
     })
